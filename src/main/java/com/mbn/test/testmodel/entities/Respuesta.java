@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.rest.core.annotation.RestResource;
+
 /**
  *
  * @author Luis Enrique Cervantes Roldán
@@ -37,11 +39,13 @@ public class Respuesta implements Serializable {
     private Integer practico;
     @Column(name = "proyecto")
     private Integer proyecto;
-    @JoinColumn(name = "tecnologia_id", referencedColumnName = "categoria_id")
+    @JoinColumn(name = "tecnologia_id", referencedColumnName = "tecnologia_id")
     @ManyToOne(optional = false)
-    private Categoria tecnologiaId;
+    @RestResource(exported = false)
+    private Tecnologia tecnologiaId;
     @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id")
     @ManyToOne(optional = false)
+    @RestResource(exported = false)
     private Usuario usuarioId;
 
     public Respuesta() {
@@ -83,11 +87,11 @@ public class Respuesta implements Serializable {
         this.proyecto = proyecto;
     }
 
-    public Categoria getTecnologiaId() {
+    public Tecnologia getTecnologiaId() {
         return tecnologiaId;
     }
 
-    public void setTecnologiaId(Categoria tecnologiaId) {
+    public void setTecnologiaId(Tecnologia tecnologiaId) {
         this.tecnologiaId = tecnologiaId;
     }
 
